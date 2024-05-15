@@ -1,0 +1,79 @@
+.mainBox{
+    border-radius: 4px;
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.action{
+   position: relative;
+   
+}
+.form-control{
+    border: rgb(14, 231, 14) !important;
+    box-shadow: rgba(75, 252, 5, 0.815) 0px 1px 3px 0px, rgba(0, 124, 248, 0.945) 0px 0px 0px 1px!important;
+}
+td input{
+    width: 17px;
+    height: 30px;
+}
+td{
+    vertical-align: middle;
+}
+.table{
+    border-radius: 5px !important;
+    
+}
+.item{
+    
+    max-width: 95px;
+    word-wrap: break-word;
+}
+
+.mini{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.actionBtn{
+    width: 100%;
+    display: none;
+    justify-content: center;
+    
+}
+.fristTable{
+    display: none;
+}
+.show{
+    display: block;
+}
+.show2{
+    display: flex;
+}
+.h1 {
+    line-height: 2;
+    margin-bottom:0;
+}
+.err{
+    border: 1px solid red !important;
+    box-shadow: rgba(243, 8, 8, 0.76) 0px 5px 15px !important;
+}
+@media (max-width:359px){
+    .h1 {
+        line-height: 3;
+    }
+    .mainBox {
+        
+        width: 97%;
+    }
+    td input {
+        width: 17px;
+        height: 50px;
+    }
+    .title{
+        margin: 0 !important;
+    }
+}
