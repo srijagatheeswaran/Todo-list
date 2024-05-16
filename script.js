@@ -38,9 +38,15 @@ function forClear(){
 function removeEle(element){
     arr.splice(element,1);
     tableBody.innerHTML = "";
+    if(arr.length ==0){
+        document.getElementById('fristTable').classList.remove('show');
+        document.getElementById('actionBtn').classList.remove('show2');
+
+    }
     arr.map(item => { 
         let sno = arr.indexOf(item)+1;
         let id = arr.indexOf(item);
+       
         
     document.getElementById('tableBody').innerHTML += ` <tr>
      <td class="ps-3">${sno}</td>
@@ -50,12 +56,14 @@ function removeEle(element){
  
     </tr>`
     
+    
 })
 }
 
 let actionArr=[]
 let value
 function saveAction(){
+    document.getElementById('table2').classList.add('show');
     let actionTableBody = document.getElementById('actionTableBody');
     let checkBox = document.querySelectorAll('input:checked');
     console.log(checkBox)
@@ -89,6 +97,11 @@ actionArr.map((item,index)=> {
      
         </tr>`})
     })
+    if(arr.length ==0){
+        document.getElementById('fristTable').classList.remove('show');
+        document.getElementById('actionBtn').classList.remove('show2');
+
+    }
 
 
     
@@ -105,6 +118,15 @@ function removeEleTable(element){
     <td class="item">${item}</td>
     <td class="text-success mini">Completed <span><i class="bi bi-x h1 text-dark" onclick = "removeEleTable(${value})"></i></span></td>
 </tr>`
+
     
 })
+if(actionArr.length ==0){
+    document.getElementById('table2').classList.remove('show');
+    
+}
+else{
+    
+}
+
 }

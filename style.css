@@ -1,3 +1,6 @@
+*{
+    transition: all 1s ease-in;
+}
 .mainBox{
     border-radius: 4px;
     width: 90%;
@@ -47,12 +50,16 @@ td{
 .fristTable{
     display: none;
 }
+.table2{
+    display: none;
+}
 .show{
     display: block;
 }
 .show2{
     display: flex;
 }
+
 .h1 {
     line-height: 2;
     margin-bottom:0;
