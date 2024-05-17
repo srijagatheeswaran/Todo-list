@@ -18,7 +18,7 @@
                     <label class="form-lable mb-2 d-flex ">Enter your Do's</label>
                     <input type="text" class=" form-control " id="inputBox"  placeholder="Enter yours Todo's" >
                     <div class="container d-flex justify-content-center">
-                        <button id="myform" type="button" class="btn btn-success m-3 " onclick="forSave()"  >Save</button>
+                        <button id="myform" type="button" class="btn btn-success m-3 " onclick="forSave()" >Save</button>
                         <button type="button" class="btn btn-danger m-3" onclick="forClear()">Clear</button>
                     </div>
                 </form>
@@ -48,6 +48,7 @@
                 <th class="ps-3">s.no</th>
                 <th >Item</th>
                 <th>Status</th>
+                <th class="removeAll" onclick="removeAll()">Remove all</th>
             </thead>
             <tbody id="actionTableBody">
                 
