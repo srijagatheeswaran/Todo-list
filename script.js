@@ -25,7 +25,7 @@ function forSave() {
                     <td class="ps-3">${index + 1}</td>
                     <td class="item">${item}</td>
                     <td class="text-danger">In process</td>
-                    <td class="action"><div class="mini"><input type="checkbox" ref="${item}"><i class="bi bi-x h1" onclick="removeEle(${index})"></i></div></td>
+                    <td class="action"><div class="mini"><input type="checkbox" ref="${item}"><i class="bi bi-x h1" onclick="removeEle('${item}')"></i></div></td>
                 </tr>`;
             });
 
@@ -48,7 +48,7 @@ function forClear() {
 }
 
 function removeEle(element) {
-    arr.pop(element);
+    arr = arr.filter(item => item !== element);
     let tableBody = document.getElementById('tableBody');
     tableBody.innerHTML = "";
     if (arr.length == 0) {
@@ -60,7 +60,7 @@ function removeEle(element) {
             <td class="ps-3">${index + 1}</td>
             <td class="item">${item}</td>
             <td class="text-danger">In process</td>
-            <td class="action"><div class="mini"><input type="checkbox" ref="${item}"><i class="bi bi-x h1" onclick="removeEle(${index})"></i></div></td>
+            <td class="action"><div class="mini"><input type="checkbox" ref="${item}"><i class="bi bi-x h1" onclick="removeEle('${item}')"></i></div></td>
         </tr>`;
     });
 }
@@ -73,18 +73,20 @@ function saveAction() {
     checkBox.forEach(element => {
         id.push(element.getAttribute('ref'));
     });
+    
     id.forEach(item => {
         actionArr.push(item);
-        arr.pop(item);
-        
+        arr = arr.filter(item1 =>item1 !==item);
     })
     id.splice(0)
+    
+
     actionArr.forEach((item, index) => {
         actionTableBody.innerHTML += `<tr>
             <td class="ps-3">${index + 1}</td>
             <td class="item">${item}</td>
             <td class="text-success ">Completed</td>
-            <td><i class="bi bi-x h1 text-dark removeAll " onclick="removeEleTable(${index})"></i></td>
+            <td><i class="bi bi-x h1 text-dark removeAll " onclick="removeEleTable('${item}')" ></i></td>
         </tr>`;
     });
 
@@ -95,7 +97,7 @@ function saveAction() {
             <td class="ps-3">${index + 1}</td>
             <td class="item">${item}</td>
             <td class="text-danger">In process</td>
-            <td class="action"><div class="mini"><input type="checkbox" ref="${item}"><i class="bi bi-x h1" onclick="removeEle(${index})"></i></div></td>
+            <td class="action"><div class="mini"><input type="checkbox" ref="${item}"><i class="bi bi-x h1" onclick="removeEle('${item}')"></i></div></td>
         </tr>`;
     });
 
@@ -106,7 +108,7 @@ function saveAction() {
 }
 
 function removeEleTable(element) {
-    actionArr.pop(element);
+    actionArr = actionArr.filter(item => item !== element);
     let actionTableBody = document.getElementById('actionTableBody');
     actionTableBody.innerHTML = "";
     actionArr.forEach((item, index) => {
@@ -114,7 +116,7 @@ function removeEleTable(element) {
         <td class="ps-3">${index + 1}</td>
         <td class="item">${item}</td>
         <td class="text-success ">Completed</td>
-        <td><i class="bi bi-x h1 text-dark removeAll" onclick="removeEleTable(${index})"></i></td>
+        <td><i class="bi bi-x h1 text-dark removeAll" onclick="removeEleTable('${item}')"></i></td>
     </tr>`;
     });
     if (actionArr.length == 0) {
@@ -130,3 +132,4 @@ function removeAll(){
 
 
 }
+
