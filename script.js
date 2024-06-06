@@ -20,14 +20,9 @@ function forSave() {
         if(!exists){
             tableBody.innerHTML = "";
             arr.push(inputBox.value);
-            arr.map((item, index) => {
-                tableBody.innerHTML += `<tr>
-                    <td class="ps-3">${index + 1}</td>
-                    <td class="item">${item}</td>
-                    <td class="text-danger">In process</td>
-                    <td class="action"><div class="mini"><input type="checkbox" ref="${item}"><i class="bi bi-x h1" onclick="removeEle('${item}')"></i></div></td>
-                </tr>`;
-            });
+            localStorage.setItem("savearr",JSON.stringify(arr))
+            showCon()
+            
 
         }
         else{
@@ -42,6 +37,21 @@ function forSave() {
         inputBox.classList.add('err');
     }
 }
+function showCon(){
+    if (arr.length == 0) {
+        document.getElementById('fristTable').classList.remove('show');
+        document.getElementById('actionBtn').classList.remove('show2');
+    }
+    arr.map((item, index) => {
+        tableBody.innerHTML += `<tr>
+            <td class="ps-3">${index + 1}</td>
+            <td class="item">${item}</td>
+            <td class="text-danger">In process</td>
+            <td class="action"><div class="mini"><input type="checkbox" ref="${item}"><i class="bi bi-x h1" onclick="removeEle('${item}')"></i></div></td>
+        </tr>`;
+    });
+
+}
 
 function forClear() {
     inputBox.value = "";
@@ -50,6 +60,7 @@ function forClear() {
 function removeEle(element) {
     arr = arr.filter(item => item !== element);
     let tableBody = document.getElementById('tableBody');
+    localStorage.setItem("savearr",JSON.stringify(arr))
     tableBody.innerHTML = "";
     if (arr.length == 0) {
         document.getElementById('fristTable').classList.remove('show');
@@ -79,6 +90,8 @@ function saveAction() {
         arr = arr.filter(item1 =>item1 !==item);
     })
     id.splice(0)
+    localStorage.setItem("savearr",JSON.stringify(arr))
+    localStorage.setItem("saveAction",JSON.stringify(actionArr))
     
 
     actionArr.forEach((item, index) => {
@@ -106,9 +119,31 @@ function saveAction() {
         document.getElementById('actionBtn').classList.remove('show2');
     }
 }
+window.onload = ()=>{
+    arr = JSON.parse( localStorage.getItem("savearr")) || []
+    actionArr =JSON.parse(localStorage.getItem("saveAction")) ||[]
+    console.log(arr)
+    document.getElementById('fristTable').classList.add('show');
+    document.getElementById('actionBtn').classList.add('show2');
+    inputBox.classList.remove('err');
+    showCon()
+    if(actionArr.length>0){
+        document.getElementById('table2').classList.add('show');
+        actionArr.forEach((item, index) => {
+            actionTableBody.innerHTML += `<tr>
+                <td class="ps-3">${index + 1}</td>
+                <td class="item">${item}</td>
+                <td class="text-success ">Completed</td>
+                <td><i class="bi bi-x h1 text-dark removeAll " onclick="removeEleTable('${item}')" ></i></td>
+            </tr>`;})
+    
 
+    }
+    
+ }
 function removeEleTable(element) {
     actionArr = actionArr.filter(item => item !== element);
+    localStorage.setItem("saveAction",JSON.stringify(actionArr))
     let actionTableBody = document.getElementById('actionTableBody');
     actionTableBody.innerHTML = "";
     actionArr.forEach((item, index) => {
@@ -125,6 +160,7 @@ function removeEleTable(element) {
 }
 function removeAll(){
     actionArr.splice(0)
+    localStorage.clear("saveAction")
     actionTableBody.innerHTML = "";
     if (actionArr.length == 0) {
         document.getElementById('table2').classList.remove('show');
